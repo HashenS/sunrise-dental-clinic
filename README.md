@@ -203,7 +203,7 @@ This project was developed as part of the **CIS6003 Advanced Programming** modul
 
 **Module:** CIS6003 Advanced Programming  
 **Assessment:** WRIT1 — Sunrise Dental Clinic System  
-**Academic Year:** 2024/2025
+**Academic Year:** 2026
 
 ---
 
