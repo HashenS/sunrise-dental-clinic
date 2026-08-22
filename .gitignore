@@ -1,0 +1,21 @@
+target/
+*.class
+*.war
+*.ear
+*.jar
+*.log
+*.pdf
+.DS_Store
+.idea/
+*.iml
+.settings/
+.project
+.classpath
+dependency-reduced-pom.xml
+.vscode/
+.gemini/
+
+# Assignment documents - not part of the code repo
+Task A-Diagrams/
+UML_DESIGN.md
+session-*.pdf

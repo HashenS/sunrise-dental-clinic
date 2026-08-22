@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/search-appointment")
 public class SearchServlet extends HttpServlet {
@@ -26,21 +27,36 @@ public class SearchServlet extends HttpServlet {
         }
 
         String appointmentNumber = request.getParameter("appointmentNumber");
-        if (appointmentNumber == null || appointmentNumber.trim().isEmpty()) {
+        String nicNumber         = request.getParameter("nicNumber");
+
+        // --- Search by Appointment Number ---
+        if (appointmentNumber != null && !appointmentNumber.trim().isEmpty()) {
+            Appointment appt = appointmentDAO.findByNumber(appointmentNumber.trim());
+            if (appt != null) {
+                request.setAttribute("appointment", appt);
+                Bill bill = billDAO.findByAppointmentNumber(appointmentNumber.trim());
+                if (bill != null) {
+                    request.setAttribute("bill", bill);
+                }
+            } else {
+                request.setAttribute("errorMessage", "No appointment found with number: " + appointmentNumber);
+            }
+
+        // --- Search by NIC Number ---
+        } else if (nicNumber != null && !nicNumber.trim().isEmpty()) {
+            List<Appointment> apptList = appointmentDAO.findByNic(nicNumber.trim());
+            if (!apptList.isEmpty()) {
+                request.setAttribute("appointmentList", apptList);
+                request.setAttribute("searchedNic", nicNumber.trim());
+            } else {
+                request.setAttribute("errorMessage", "No appointments found for NIC: " + nicNumber);
+            }
+
+        } else {
             response.sendRedirect("search.jsp");
             return;
         }
 
-        Appointment appt = appointmentDAO.findByNumber(appointmentNumber.trim());
-        if (appt != null) {
-            request.setAttribute("appointment", appt);
-            Bill bill = billDAO.findByAppointmentNumber(appointmentNumber.trim());
-            if (bill != null) {
-                request.setAttribute("bill", bill);
-            }
-        } else {
-            request.setAttribute("errorMessage", "No appointment found with number: " + appointmentNumber);
-        }
         request.getRequestDispatcher("search.jsp").forward(request, response);
     }
 }

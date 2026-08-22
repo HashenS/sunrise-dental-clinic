@@ -27,6 +27,7 @@ public class AppointmentServlet extends HttpServlet {
         String patientName = request.getParameter("patientName");
         String address = request.getParameter("address");
         String contactNumber = request.getParameter("contactNumber");
+        String nicNumber = request.getParameter("nicNumber");
         String dentistName = request.getParameter("dentistName");
         String treatmentType = request.getParameter("treatmentType");
         String dateStr = request.getParameter("appointmentDate");
@@ -47,6 +48,7 @@ public class AppointmentServlet extends HttpServlet {
                 patientName,
                 address,
                 contactNumber,
+                nicNumber != null ? nicNumber.trim() : "",
                 dentistName,
                 treatmentType,
                 appointmentDate,

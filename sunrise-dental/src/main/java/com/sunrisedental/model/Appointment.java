@@ -9,6 +9,7 @@ public class Appointment {
     private String patientName;
     private String address;
     private String contactNumber;
+    private String nicNumber;
     private String dentistName;
     private String treatmentType;
     private LocalDate appointmentDate;
@@ -16,12 +17,14 @@ public class Appointment {
 
     public Appointment() {}
 
-    public Appointment(String appointmentNumber, String patientName, String address, String contactNumber, 
-                       String dentistName, String treatmentType, LocalDate appointmentDate, LocalTime appointmentTime) {
+    public Appointment(String appointmentNumber, String patientName, String address, String contactNumber,
+                       String nicNumber, String dentistName, String treatmentType,
+                       LocalDate appointmentDate, LocalTime appointmentTime) {
         this.appointmentNumber = appointmentNumber;
         this.patientName = patientName;
         this.address = address;
         this.contactNumber = contactNumber;
+        this.nicNumber = nicNumber;
         this.dentistName = dentistName;
         this.treatmentType = treatmentType;
         this.appointmentDate = appointmentDate;
@@ -67,6 +70,14 @@ public class Appointment {
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
+    }
+
+    public String getNicNumber() {
+        return nicNumber;
+    }
+
+    public void setNicNumber(String nicNumber) {
+        this.nicNumber = nicNumber;
     }
 
     public String getDentistName() {
