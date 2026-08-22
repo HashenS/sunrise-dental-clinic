@@ -7,6 +7,11 @@
         response.sendRedirect("login.jsp");
         return;
     }
+    // If loaded directly (not via servlet), redirect through servlet to load history
+    if (request.getAttribute("history") == null) {
+        response.sendRedirect("search-appointment");
+        return;
+    }
     String user = (String) session.getAttribute("user");
 %>
 <!DOCTYPE html>
@@ -220,6 +225,63 @@
                 </table>
             </div>
         <%  } %>
+
+        <!-- ===== Appointment History Panel ===== -->
+        <%
+            List<Appointment> history = (List<Appointment>) request.getAttribute("history");
+            if (history != null) {
+        %>
+        <div style="margin-top: 40px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h2 style="font-size: 1.15rem; margin: 0;">📋 Appointment History</h2>
+                <span style="font-size: 0.85rem; color: var(--text-secondary);"><%= history.size() %> total record<%= history.size() != 1 ? "s" : "" %> &nbsp;•&nbsp; Latest first</span>
+            </div>
+
+            <% if (history.isEmpty()) { %>
+                <div class="glass-container" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <p style="font-size: 1.3rem;">📭</p>
+                    <p>No appointments registered yet.</p>
+                </div>
+            <% } else { %>
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+                    <thead>
+                        <tr style="background: rgba(99,102,241,0.12);">
+                            <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text-primary);">Appt No</th>
+                            <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text-primary);">Patient</th>
+                            <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text-primary);">NIC</th>
+                            <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text-primary);">Dentist</th>
+                            <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text-primary);">Treatment</th>
+                            <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text-primary);">Date</th>
+                            <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text-primary);">Time</th>
+                            <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: var(--text-primary);">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (Appointment h : history) { %>
+                        <tr style="border-top: 1px solid var(--border-color); transition: background 0.15s;"
+                            onmouseover="this.style.background='rgba(99,102,241,0.05)'"
+                            onmouseout="this.style.background=''">>
+                            <td style="padding: 11px 16px;"><strong style="color: var(--accent-color);"><%= h.getAppointmentNumber() %></strong></td>
+                            <td style="padding: 11px 16px;"><%= h.getPatientName() %></td>
+                            <td style="padding: 11px 16px; font-family: monospace; font-size: 0.82rem; color: var(--text-secondary);"><%= h.getNicNumber() %></td>
+                            <td style="padding: 11px 16px;"><%= h.getDentistName() %></td>
+                            <td style="padding: 11px 16px;"><%= h.getTreatmentType() %></td>
+                            <td style="padding: 11px 16px;"><%= h.getAppointmentDate() %></td>
+                            <td style="padding: 11px 16px;"><%= h.getAppointmentTime() %></td>
+                            <td style="padding: 11px 16px; text-align: center;">
+                                <a href="search-appointment?appointmentNumber=<%= h.getAppointmentNumber() %>"
+                                   style="color: var(--accent-color); text-decoration: none; font-weight: 600; font-size: 0.82rem;">View</a>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <% } %>
+        </div>
+        <% } %>
+
     </main>
 
     <script>

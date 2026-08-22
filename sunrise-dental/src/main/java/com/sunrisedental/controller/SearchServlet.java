@@ -29,6 +29,9 @@ public class SearchServlet extends HttpServlet {
         String appointmentNumber = request.getParameter("appointmentNumber");
         String nicNumber         = request.getParameter("nicNumber");
 
+        // Always load appointment history for the bottom panel
+        request.setAttribute("history", appointmentDAO.findAll());
+
         // --- Search by Appointment Number ---
         if (appointmentNumber != null && !appointmentNumber.trim().isEmpty()) {
             Appointment appt = appointmentDAO.findByNumber(appointmentNumber.trim());
@@ -51,10 +54,6 @@ public class SearchServlet extends HttpServlet {
             } else {
                 request.setAttribute("errorMessage", "No appointments found for NIC: " + nicNumber);
             }
-
-        } else {
-            response.sendRedirect("search.jsp");
-            return;
         }
 
         request.getRequestDispatcher("search.jsp").forward(request, response);

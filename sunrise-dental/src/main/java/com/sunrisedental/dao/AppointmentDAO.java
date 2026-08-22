@@ -55,12 +55,30 @@ public class AppointmentDAO {
     }
 
     public List<Appointment> findByNic(String nicNumber) {
-        String query = "SELECT * FROM appointments WHERE nic_number = ? ORDER BY appointment_date DESC";
+        String query = "SELECT * FROM appointments WHERE nic_number = ? ORDER BY appointment_date DESC, appointment_time DESC";
         List<Appointment> results = new ArrayList<>();
         try {
             Connection conn = DBConnection.getInstance().getConnection();
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ps.setString(1, nicNumber);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        results.add(mapRow(rs));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    public List<Appointment> findAll() {
+        String query = "SELECT * FROM appointments ORDER BY appointment_date DESC, appointment_time DESC";
+        List<Appointment> results = new ArrayList<>();
+        try {
+            Connection conn = DBConnection.getInstance().getConnection();
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         results.add(mapRow(rs));
