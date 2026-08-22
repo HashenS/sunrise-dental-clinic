@@ -48,7 +48,7 @@
             <form action="register-appointment" method="POST">
                 <div class="form-group">
                     <label for="patientName">Patient Full Name</label>
-                    <input type="text" id="patientName" name="patientName" class="form-input" placeholder="e.g. John Doe" required>
+                    <input type="text" id="patientName" name="patientName" class="form-input" placeholder="e.g. Hashen Shehara" required>
                 </div>
 
                 <div class="form-group">
