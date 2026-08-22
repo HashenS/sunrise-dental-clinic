@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS bills (
     FOREIGN KEY (appointment_number) REFERENCES appointments(appointment_number) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- Seed initial admin user (username: admin, password: adminpassword)
+-- Seed initial staff user (username: staff, password: adminpassword)
 INSERT INTO users (username, password, role) 
-VALUES ('admin', 'adminpassword', 'RECEPTIONIST')
+VALUES ('staff', 'adminpassword', 'RECEPTIONIST')
 ON DUPLICATE KEY UPDATE username=username;

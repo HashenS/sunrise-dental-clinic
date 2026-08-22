@@ -140,7 +140,7 @@ http://localhost:8080/sunrise-dental/
 
 ### Login Credentials
 ```
-Username: admin
+Username: staff
 Password: adminpassword
 ```
 
