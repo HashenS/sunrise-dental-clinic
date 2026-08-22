@@ -4,7 +4,8 @@
         response.sendRedirect("login.jsp");
         return;
     }
-    String user = (String) session.getAttribute("user");
+    String user     = (String) session.getAttribute("user");
+    boolean isAdmin = "ADMIN".equals(session.getAttribute("userRole"));
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,8 @@
         <ul class="navbar-nav">
             <li><a href="dashboard.jsp" class="navbar-link">Home</a></li>
             <li><a href="register.jsp" class="navbar-link active">Register Appointment</a></li>
-            <li><a href="search.jsp" class="navbar-link">Search & Billing</a></li>
+            <li><a href="search-appointment" class="navbar-link">Search &amp; Billing</a></li>
+            <% if (isAdmin) { %><li><a href="manage-staff" class="navbar-link">Manage Staff</a></li><% } %>
             <li><a href="help.jsp" class="navbar-link">Help</a></li>
             <li><span style="color: var(--text-secondary); margin-left: 10px;">Hello, <%= user %></span></li>
             <li><a href="logout" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem; width: auto;">Logout</a></li>
