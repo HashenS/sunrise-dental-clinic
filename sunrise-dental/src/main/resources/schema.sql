@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS appointments (
     patient_name VARCHAR(100) NOT NULL,
     address VARCHAR(200) NOT NULL,
     contact_number VARCHAR(15) NOT NULL,
+    nic_number VARCHAR(12) NOT NULL,
     dentist_name VARCHAR(100) NOT NULL,
     treatment_type VARCHAR(50) NOT NULL,
     appointment_date DATE NOT NULL,

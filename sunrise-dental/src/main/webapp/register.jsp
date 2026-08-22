@@ -61,6 +61,11 @@
                     <input type="text" id="contactNumber" name="contactNumber" class="form-input" placeholder="e.g. 0771234567" pattern="\d{10}" title="Must be exactly 10 digits" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="nicNumber">NIC Number</label>
+                    <input type="text" id="nicNumber" name="nicNumber" class="form-input" placeholder="e.g. 200012345678 or 991234567V" pattern="(\d{12}|\d{9}[VvXx])" title="Enter 12-digit NIC or old 9-digit NIC ending with V/X" required>
+                </div>
+
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div class="form-group">
                         <label for="dentistName">Assigned Dentist</label>
