@@ -15,10 +15,13 @@ A full-stack Java web application for managing patient appointments, billing, an
 
 | Feature | Description |
 |---|---|
-| 🔐 **User Authentication** | Secure login/logout with session management |
-| 📅 **Register Appointment** | Store patient details, dentist, treatment, date & time |
-| 🔍 **Search Appointment** | Look up any appointment by appointment number |
-| 🧾 **Calculate & Print Bill** | Auto-calculate treatment cost + consultation fee |
+| 🔐 **User Authentication** | Secure login/logout with session management and role-based access control |
+| 📅 **Register Appointment** | Store patient details including NIC number, dentist, treatment, date & time |
+| 🔍 **Search by Appointment No.** | Look up any appointment by appointment number |
+| 🪪 **Search by NIC Number** | Retrieve full appointment history by patient NIC number |
+| 📋 **Appointment History Panel** | Real-time list of all appointments on the search page |
+| 🧾 **Calculate & Print Bill** | Auto-calculate treatment cost + consultation fee with printable invoice |
+| 👥 **Manage Staff** (Admin only) | Add, view, and delete staff accounts with role assignment |
 | ❓ **Help Section** | Step-by-step guide for clinic staff |
 | 🚪 **Exit / Logout** | Secure session termination |
 
@@ -36,7 +39,7 @@ A full-stack Java web application for managing patient appointments, billing, an
 ┌──────────────────▼──────────────────────┐
 │           Controller Layer              │
 │   Java Servlets (Login, Appointment,    │
-│   Search, Bill, Logout)                 │
+│   Search, Bill, ManageStaff, Logout)    │
 └──────────────────┬──────────────────────┘
                    │
 ┌──────────────────▼──────────────────────┐
@@ -76,8 +79,8 @@ A full-stack Java web application for managing patient appointments, billing, an
 sunrise_dental
 ├── users          (id, username, password, role)
 ├── appointments   (id, appointment_number, patient_name, address,
-│                   contact_number, dentist_name, treatment_type,
-│                   appointment_date, appointment_time)
+│                   contact_number, nic_number, dentist_name,
+│                   treatment_type, appointment_date, appointment_time)
 └── bills          (id, appointment_number, patient_name,
                     treatment_type, consultation_fee,
                     treatment_cost, total_cost, payment_status)
@@ -186,7 +189,7 @@ GitHub Actions automatically runs on every push and pull request:
 ```
 sunrise-dental/
 ├── src/main/java/com/sunrisedental/
-│   ├── controller/     # Servlets (Login, Logout, Appointment, Search, Bill)
+│   ├── controller/     # Servlets (Login, Logout, Appointment, Search, Bill, ManageStaff)
 │   ├── dao/            # Data Access Objects + DBConnection
 │   ├── model/          # POJOs (Appointment, Bill, User)
 │   └── service/        # Business logic + Billing strategies
