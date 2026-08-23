@@ -136,7 +136,12 @@ mvn clean package -DskipTests
 cp target/sunrise-dental.war $CATALINA_HOME/webapps/
 ```
 
-### Step 4 — Start Tomcat & Open Browser
+### Step 4 — Start Tomcat
+```bash
+brew services start tomcat
+```
+
+### Step 5 — Open Browser
 ```
 http://localhost:8080/sunrise-dental/
 ```
