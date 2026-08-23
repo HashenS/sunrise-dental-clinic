@@ -25,7 +25,7 @@
         .search-tabs { display: flex; gap: 0; margin-bottom: 0; }
         .search-tab {
             padding: 10px 24px; cursor: pointer; border: 1px solid var(--border-color);
-            background: var(--bg-surface); color: var(--text-secondary);
+            background: var(--bg-surface); color: var(--text-primary);
             font-size: 0.9rem; font-weight: 500; transition: all 0.2s;
         }
         .search-tab:first-child { border-radius: 10px 0 0 0; }

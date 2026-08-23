@@ -57,6 +57,7 @@
                     <p><%= appt.getPatientName() %></p>
                     <p style="font-weight: 400; color: #6b7280; font-size: 0.9rem; margin-top: 4px;">Address: <%= appt.getAddress() %></p>
                     <p style="font-weight: 400; color: #6b7280; font-size: 0.9rem;">Contact: <%= appt.getContactNumber() %></p>
+                    <p style="font-weight: 400; color: #6b7280; font-size: 0.9rem;">NIC: <%= appt.getNicNumber() %></p>
                 </div>
                 <div class="invoice-detail-block" style="text-align: right;">
                     <h4>Booking Info</h4>
